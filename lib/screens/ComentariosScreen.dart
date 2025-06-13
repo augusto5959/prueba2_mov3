@@ -8,23 +8,23 @@ class Comentarios extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: formulario(context),
-    drawer: Drawer(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Comentarios'),
+        centerTitle: true,
+      ),
+      body: formulario(context),
+      drawer: Drawer(
         child: ListView(
           children: [
             DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
+              decoration: BoxDecoration(color: Colors.blue),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
                   Text(
                     'Menú',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                    ),
+                    style: TextStyle(color: Colors.white, fontSize: 24),
                   ),
                 ],
               ),
@@ -33,31 +33,36 @@ class Comentarios extends StatelessWidget {
               leading: const Icon(Icons.home),
               title: const Text('Inicio'),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const  Welcome()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Welcome()),
+                );
               },
             ),
             ListTile(
               leading: const Icon(Icons.movie),
               title: const Text('Peliculas'),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const Lista()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Lista()),
+                );
               },
             ),
-
           ],
         ),
-      ),);
+      ),
+    );
   }
 }
 
-Widget formulario(context){
+Widget formulario(context) {
   TextEditingController serie = TextEditingController();
   TextEditingController comentario = TextEditingController();
 
   return SingleChildScrollView(
     child: Column(
       children: [
-        
         TextField(
           controller: serie,
           decoration: const InputDecoration(labelText: "Serie"),
@@ -66,7 +71,10 @@ Widget formulario(context){
           controller: comentario,
           decoration: const InputDecoration(labelText: "Comentario"),
         ),
-        FilledButton(onPressed: ()=>guardar(serie.text, comentario.text, context), child: Text("Enviar")),
+        FilledButton(
+          onPressed: () => guardar(serie.text, comentario.text, context),
+          child: Text("Enviar"),
+        ),
       ],
     ),
   );
@@ -75,9 +83,6 @@ Widget formulario(context){
 Future<void> guardar(String serie, String comentario, context) async {
   DatabaseReference ref = FirebaseDatabase.instance.ref("Comentarios").push();
 
-  await ref.set({
-    "serie": serie,
-    "comentario": comentario,
-  });
+  await ref.set({"serie": serie, "comentario": comentario});
   Navigator.push(context, MaterialPageRoute(builder: (context) => Lista()));
 }
