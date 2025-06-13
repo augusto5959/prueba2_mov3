@@ -79,5 +79,5 @@ Future<void> guardar(String serie, String comentario, context) async {
     "serie": serie,
     "comentario": comentario,
   });
-  Navigator.push(context, MaterialPageRoute(builder: (context) => Comentarios()));
+  Navigator.push(context, MaterialPageRoute(builder: (context) => Lista()));
 }
