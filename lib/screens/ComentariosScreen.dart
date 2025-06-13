@@ -84,5 +84,5 @@ Future<void> guardar(String serie, String comentario, context) async {
   DatabaseReference ref = FirebaseDatabase.instance.ref("Comentarios").push();
 
   await ref.set({"serie": serie, "comentario": comentario});
-  Navigator.push(context, MaterialPageRoute(builder: (context) => Lista()));
+  Navigator.push(context, MaterialPageRoute(builder: (context) => Comentarios()));
 }
