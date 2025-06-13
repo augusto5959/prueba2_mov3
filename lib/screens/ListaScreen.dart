@@ -46,7 +46,7 @@ class Lista extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.movie),
-              title: const Text('Peliculas'),
+              title: const Text('Comentarios'),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const Comentarios()));
               },
